@@ -1,5 +1,5 @@
 import AdminJS from 'adminjs'
-import { Database, Resource } from '@adminjs/prisma'
+import { Database, Resource, getModelByName } from '@adminjs/prisma'
 import { PrismaClient } from '@prisma/client'
 
 AdminJS.registerAdapter({ Database, Resource })
@@ -9,7 +9,7 @@ export function buildAdmin(prisma: PrismaClient) {
     rootPath: '/admin',
     resources: [
       {
-        resource: { model: (prisma as any)._dmmf.modelMap.Project, client: prisma },
+        resource: { model: getModelByName('Project'), client: prisma },
         options: {
           navigation: { name: 'Catalog', icon: 'Folder' },
           properties: {
@@ -22,7 +22,7 @@ export function buildAdmin(prisma: PrismaClient) {
         }
       },
       {
-        resource: { model: (prisma as any)._dmmf.modelMap.MicroserviceModule, client: prisma },
+        resource: { model: getModelByName('MicroserviceModule'), client: prisma },
         options: {
           navigation: { name: 'Catalog', icon: 'Cube' },
           properties: {
@@ -35,7 +35,7 @@ export function buildAdmin(prisma: PrismaClient) {
         }
       },
       {
-        resource: { model: (prisma as any)._dmmf.modelMap.CommonPrompt, client: prisma },
+        resource: { model: getModelByName('CommonPrompt'), client: prisma },
         options: {
           navigation: { name: 'Content', icon: 'Document' },
           properties: {
