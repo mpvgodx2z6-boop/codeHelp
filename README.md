@@ -19,6 +19,7 @@ Project model represents a software project with its architecture and metadata.
 - `status` (String, default="active") - Project status
 - `isDeleted` (Boolean, default=false) - Soft delete flag
 - `createdAt`, `updatedAt` - Timestamps
+- `createdBy`, `updatedBy` (String, optional) - User tracking fields
 - **Relation:** One-to-many with MicroserviceModule
 
 ### MicroserviceModule
@@ -37,6 +38,7 @@ MicroserviceModule represents a module or microservice within a project.
 - `status` (String, default="active") - Module status
 - `isDeleted` (Boolean, default=false) - Soft delete flag
 - `createdAt`, `updatedAt` - Timestamps
+- `createdBy`, `updatedBy` (String, optional) - User tracking fields
 - **Relation:** Belongs to Project
 
 ### CommonPrompt
@@ -50,6 +52,7 @@ CommonPrompt represents reusable prompt templates that can be used across projec
 - `contentMd` (String) - Prompt content in Markdown format
 - `isDeleted` (Boolean, default=false) - Soft delete flag
 - `createdAt`, `updatedAt` - Timestamps
+- `createdBy`, `updatedBy` (String, optional) - User tracking fields
 
 ## JSON Fields
 
@@ -103,3 +106,12 @@ npm start
 - Admin authentication is not enabled by default. If you need auth, use `@adminjs/express` authentication helpers or add a session store.
 - The Prisma schema lives in `prisma/schema.prisma`.
 - CommonPrompt is now a standalone resource for cross-project reusability. Future enhancements may include ProjectPrompt/ModulePrompt junction tables for explicit associations.
+- All models include standard tracking fields: `createdAt`, `updatedAt`, `createdBy`, `updatedBy`
+
+## Documentation
+
+For detailed information about the project, please refer to:
+
+- **[Coding Standards](./docs/CODING_STANDARDS.md)** - Code formatting, comments, file structure, and development guidelines
+- **[Changelog](./docs/CHANGELOG.md)** - Detailed history of all changes, migrations, and feature additions
+- **[Prompt Library](./docs/PROMPT_LIBRARY.md)** - Common issues, best practices, and learning resources

@@ -20,6 +20,8 @@ model Project {
   isDeleted         Boolean  @default(false)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  createdBy         String?  // 创建人ID
+  updatedBy         String?  // 更新人ID
 
   microserviceModules MicroserviceModule[]
 }
@@ -38,6 +40,8 @@ model MicroserviceModule {
   isDeleted         Boolean  @default(false)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  createdBy         String?  // 创建人ID
+  updatedBy         String?  // 更新人ID
 
   project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
@@ -53,4 +57,6 @@ model CommonPrompt {
   isDeleted   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  createdBy   String?  // 创建人ID
+  updatedBy   String?  // 更新人ID
 }
