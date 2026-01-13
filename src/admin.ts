@@ -11,13 +11,27 @@ export function buildAdmin(prisma: PrismaClient) {
       {
         resource: { model: (prisma as any)._dmmf.modelMap.Project, client: prisma },
         options: {
-          navigation: { name: 'Catalog', icon: 'Folder' }
+          navigation: { name: 'Catalog', icon: 'Folder' },
+          properties: {
+            architectureMd: { type: 'textarea' },
+            descriptionMd: { type: 'textarea' },
+            architectureJson: { type: 'textarea' },
+            forbiddenMistakes: { type: 'textarea' },
+            modules: { type: 'textarea' },
+          }
         }
       },
       {
         resource: { model: (prisma as any)._dmmf.modelMap.MicroserviceModule, client: prisma },
         options: {
-          navigation: { name: 'Catalog', icon: 'Cube' }
+          navigation: { name: 'Catalog', icon: 'Cube' },
+          properties: {
+            architectureMd: { type: 'textarea' },
+            descriptionMd: { type: 'textarea' },
+            architectureJson: { type: 'textarea' },
+            forbiddenMistakes: { type: 'textarea' },
+            modules: { type: 'textarea' },
+          }
         }
       },
       {
@@ -25,8 +39,8 @@ export function buildAdmin(prisma: PrismaClient) {
         options: {
           navigation: { name: 'Content', icon: 'Document' },
           properties: {
-            content: { type: 'textarea' },
-            tags: { type: 'string' }
+            contentMd: { type: 'textarea' },
+            tags: { type: 'textarea' }
           }
         }
       }
