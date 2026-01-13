@@ -1,5 +1,5 @@
 import AdminJS from 'adminjs'
-import { Database, Resource } from '@adminjs/prisma'
+import { Database, Resource, getModelByName } from '@adminjs/prisma'
 import { PrismaClient } from '@prisma/client'
 
 AdminJS.registerAdapter({ Database, Resource })
@@ -9,24 +9,38 @@ export function buildAdmin(prisma: PrismaClient) {
     rootPath: '/admin',
     resources: [
       {
-        resource: { model: (prisma as any)._dmmf.modelMap.Project, client: prisma },
+        resource: { model: getModelByName('Project'), client: prisma },
         options: {
-          navigation: { name: 'Catalog', icon: 'Folder' }
+          navigation: { name: 'Catalog', icon: 'Folder' },
+          properties: {
+            architectureMd: { type: 'textarea' },
+            descriptionMd: { type: 'textarea' },
+            architectureJson: { type: 'textarea' },
+            forbiddenMistakes: { type: 'textarea' },
+            modules: { type: 'textarea' },
+          }
         }
       },
       {
-        resource: { model: (prisma as any)._dmmf.modelMap.MicroserviceModule, client: prisma },
+        resource: { model: getModelByName('MicroserviceModule'), client: prisma },
         options: {
-          navigation: { name: 'Catalog', icon: 'Cube' }
+          navigation: { name: 'Catalog', icon: 'Cube' },
+          properties: {
+            architectureMd: { type: 'textarea' },
+            descriptionMd: { type: 'textarea' },
+            architectureJson: { type: 'textarea' },
+            forbiddenMistakes: { type: 'textarea' },
+            modules: { type: 'textarea' },
+          }
         }
       },
       {
-        resource: { model: (prisma as any)._dmmf.modelMap.CommonPrompt, client: prisma },
+        resource: { model: getModelByName('CommonPrompt'), client: prisma },
         options: {
           navigation: { name: 'Content', icon: 'Document' },
           properties: {
-            content: { type: 'textarea' },
-            tags: { type: 'string' }
+            contentMd: { type: 'textarea' },
+            tags: { type: 'textarea' }
           }
         }
       }

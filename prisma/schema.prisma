@@ -8,26 +8,42 @@ datasource db {
 }
 
 model Project {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                String   @id @default(cuid())
+  name              String
+  category          String?
+  architectureJson  String?  // JSON stored as String for SQLite
+  architectureMd    String?
+  forbiddenMistakes String?  // JSON stored as String for SQLite
+  modules           String?  // JSON stored as String for SQLite
+  descriptionMd     String?
+  status            String   @default("active")
+  isDeleted         Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  createdBy         String?  // 创建人ID
+  updatedBy         String?  // 更新人ID
 
-  modules     MicroserviceModule[]
+  microserviceModules MicroserviceModule[]
 }
 
 model MicroserviceModule {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                String   @id @default(cuid())
+  projectId         String
+  name              String
+  category          String?
+  architectureJson  String?  // JSON stored as String for SQLite
+  architectureMd    String?
+  forbiddenMistakes String?  // JSON stored as String for SQLite
+  modules           String?  // JSON stored as String for SQLite
+  descriptionMd     String?
+  status            String   @default("active")
+  isDeleted         Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  createdBy         String?  // 创建人ID
+  updatedBy         String?  // 更新人ID
 
-  projectId   String
-  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  prompts     CommonPrompt[]
+  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@index([projectId])
 }
@@ -35,13 +51,12 @@ model MicroserviceModule {
 model CommonPrompt {
   id          String   @id @default(cuid())
   title       String
-  content     String
-  tags        String?
+  type        String?
+  tags        String?  // JSON stored as String for SQLite
+  contentMd   String
+  isDeleted   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  moduleId    String
-  module      MicroserviceModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
-
-  @@index([moduleId])
+  createdBy   String?  // 创建人ID
+  updatedBy   String?  // 更新人ID
 }
